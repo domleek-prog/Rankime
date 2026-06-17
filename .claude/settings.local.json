@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(python --version 2>$null)",
+      "PowerShell(pip --version 2>$null)",
+      "PowerShell($env:PATH = [System.Environment]::GetEnvironmentVariable\\(\"PATH\", \"Machine\"\\) + \";\" + [System.Environment]::GetEnvironmentVariable\\(\"PATH\", \"User\"\\); node --version; npm --version)",
+      "Bash(curl -s -X POST http://localhost:3001/api/auth/signup -H \"Content-Type: application/json\" -d '{\"email\":\"test@test.com\",\"password\":\"password123\",\"displayName\":\"Tester\"}')",
+      "Bash(curl -s -X POST http://localhost:3001/api/auth/login -H \"Content-Type: application/json\" -d '{\"email\":\"test@test.com\",\"password\":\"password123\"}' -c /tmp/cookies.txt)",
+      "Bash(curl -s http://localhost:3001/api/list -b /tmp/cookies.txt)",
+      "Bash(curl -s \"http://localhost:3001/api/search?q=naruto\" -b /tmp/cookies.txt)",
+      "PowerShell($env:PATH = [System.Environment]::GetEnvironmentVariable\\(\"PATH\",\"Machine\"\\) + \";\" + [System.Environment]::GetEnvironmentVariable\\(\"PATH\",\"User\"\\); Start-Process powershell -ArgumentList \"-NoExit\", \"-Command\", \"cd 'C:\\\\Users\\\\harri\\\\Rankime\\\\server'; npm run dev\" -WindowStyle Normal; Start-Process powershell -ArgumentList \"-NoExit\", \"-Command\", \"cd 'C:\\\\Users\\\\harri\\\\Rankime\\\\client'; npm run dev\" -WindowStyle Normal; Write-Host \"Launched both servers.\")"
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+node_modules/
+server/node_modules/
+client/node_modules/
+client/dist/
+server/rankime.db
+server/.env
+.env
+*.db-shm
+*.db-wal
