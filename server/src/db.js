@@ -7,9 +7,6 @@ const db = new Database(DB_PATH);
 db.pragma('journal_mode = WAL');
 db.pragma('foreign_keys = ON');
 
-// Safe migrations — ignore if column already exists
-try { db.exec('ALTER TABLE anime_cache ADD COLUMN studio TEXT'); } catch {}
-
 db.exec(`
   CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -27,6 +24,7 @@ db.exec(`
     episode_count INTEGER,
     genres TEXT NOT NULL DEFAULT '[]',
     description TEXT,
+    studio TEXT,
     cached_at INTEGER NOT NULL DEFAULT (unixepoch())
   );
 
@@ -71,5 +69,10 @@ db.exec(`
 
   CREATE INDEX IF NOT EXISTS idx_watched_entries ON watched_entries(user_id, added_at);
 `);
+
+// Safe migrations for databases created before a column existed.
+// Runs after CREATE TABLE so the table is guaranteed to exist; the ALTER
+// throws (and is ignored) only when the column is already present.
+try { db.exec('ALTER TABLE anime_cache ADD COLUMN studio TEXT'); } catch {}
 
 module.exports = db;

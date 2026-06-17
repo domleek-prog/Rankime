@@ -35,6 +35,12 @@ router.get('/search', requireAuth, async (req, res) => {
       description: m.description || null,
       studio: getMainStudio(m),
     }));
+
+    // Cache results so adding them never needs a second AniList round-trip
+    for (const m of data.Page.media) {
+      try { upsertCache(m); } catch {}
+    }
+
     res.json({ results });
   } catch (err) {
     console.error('AniList search error:', err.message);
