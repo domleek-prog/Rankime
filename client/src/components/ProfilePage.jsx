@@ -8,6 +8,20 @@ export default function ProfilePage({ onBack, onOpenAdmin }) {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState('');
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+
+  async function handleDeleteAccount() {
+    setDeleting(true);
+    try {
+      await api.delete('/auth/account');
+      setUser(null); // logs out — back to the auth screen
+    } catch {
+      setError('Failed to delete account. Please try again.');
+      setDeleting(false);
+      setConfirmDelete(false);
+    }
+  }
 
   const initials = (user?.displayName || '?')
     .split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
@@ -102,6 +116,41 @@ export default function ProfilePage({ onBack, onOpenAdmin }) {
       >
         Log out
       </button>
+
+      {/* Danger zone — delete account */}
+      <div className="mt-2 pt-5 border-t border-white/5 flex flex-col gap-3">
+        <p style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.06em', fontSize: '0.8rem' }} className="text-white/25 uppercase">Danger zone</p>
+        {confirmDelete ? (
+          <div className="flex flex-col gap-3 bg-red-500/5 border border-red-400/20 rounded-2xl p-4">
+            <p className="text-sm text-white/60">
+              This permanently deletes your account and all your lists, categories, and watched shows. This cannot be undone.
+            </p>
+            <div className="flex gap-2">
+              <button
+                onClick={handleDeleteAccount}
+                disabled={deleting}
+                className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-white bg-red-500/80 hover:bg-red-500 disabled:opacity-50 transition-colors"
+              >
+                {deleting ? 'Deleting…' : 'Delete everything'}
+              </button>
+              <button
+                onClick={() => setConfirmDelete(false)}
+                disabled={deleting}
+                className="px-4 py-2.5 rounded-xl text-sm text-white/40 hover:text-white transition-colors"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        ) : (
+          <button
+            onClick={() => { setError(''); setConfirmDelete(true); }}
+            className="w-full py-3 rounded-xl text-sm font-medium text-white/40 border border-white/8 hover:border-red-400/30 hover:text-red-400 transition-colors"
+          >
+            Delete account
+          </button>
+        )}
+      </div>
     </div>
   );
 }
