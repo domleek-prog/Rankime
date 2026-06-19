@@ -10,6 +10,7 @@ import AdminPage from './AdminPage';
 import Toast from './Toast';
 
 const MAX_LIST = 50;
+const MAX_CATEGORY = 25;
 
 export default function MainApp() {
   const { user } = useAuth();
@@ -89,7 +90,7 @@ export default function MainApp() {
     try {
       const r = await api.post(`/categories/${nav.categoryId}/add`, { anilistId: anime.anilistId });
       if (r.data.removedShow) {
-        showToast(`Added "${r.data.addedTitle}" — removed "${r.data.removedShow.title}" (${MAX_LIST} max).`);
+        showToast(`Added "${r.data.addedTitle}" — removed "${r.data.removedShow.title}" (${MAX_CATEGORY} max).`);
       }
       loadCategoryEntries(nav.categoryId);
       loadCategories();
@@ -112,7 +113,7 @@ export default function MainApp() {
 
   function getTitle() {
     if (nav.screen === 'menu') return null;
-    if (nav.screen === 'leaderboard') return 'My Leaderboard';
+    if (nav.screen === 'leaderboard') return 'My Rankime Leaderboard';
     if (nav.screen === 'watched') return 'My Watched List';
     if (nav.screen === 'category') return nav.categoryName;
     if (nav.screen === 'profile') return 'Profile';
@@ -226,7 +227,6 @@ export default function MainApp() {
             watchedCount={watched.length}
             categories={categories}
             onNavigate={handleNavigate}
-            onCategoriesChange={loadCategories}
           />
         )}
 

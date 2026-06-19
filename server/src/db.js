@@ -7,6 +7,17 @@ const db = new Database(DB_PATH);
 db.pragma('journal_mode = WAL');
 db.pragma('foreign_keys = ON');
 
+// One-time migration from user-defined categories to fixed code-defined ones.
+// Detected by the presence of the old `categories` table; runs only once
+// because the table is dropped here and never recreated.
+const hasOldCategories = db.prepare(
+  "SELECT name FROM sqlite_master WHERE type='table' AND name='categories'"
+).get();
+if (hasOldCategories) {
+  db.exec('DROP TABLE IF EXISTS category_entries');
+  db.exec('DROP TABLE IF EXISTS categories');
+}
+
 db.exec(`
   CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -39,25 +50,17 @@ db.exec(`
 
   CREATE INDEX IF NOT EXISTS idx_ranked_entries_user ON ranked_entries(user_id, rank_position);
 
-  CREATE TABLE IF NOT EXISTS categories (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    name TEXT NOT NULL,
-    created_at INTEGER NOT NULL DEFAULT (unixepoch()),
-    UNIQUE(user_id, name)
-  );
-
   CREATE TABLE IF NOT EXISTS category_entries (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    category_id INTEGER NOT NULL REFERENCES categories(id) ON DELETE CASCADE,
+    category_key TEXT NOT NULL,
     anilist_id INTEGER NOT NULL REFERENCES anime_cache(anilist_id),
     rank_position INTEGER NOT NULL,
     added_at INTEGER NOT NULL DEFAULT (unixepoch()),
-    UNIQUE(user_id, category_id, anilist_id)
+    UNIQUE(user_id, category_key, anilist_id)
   );
 
-  CREATE INDEX IF NOT EXISTS idx_category_entries ON category_entries(user_id, category_id, rank_position);
+  CREATE INDEX IF NOT EXISTS idx_category_entries ON category_entries(user_id, category_key, rank_position);
 
   CREATE TABLE IF NOT EXISTS watched_entries (
     id INTEGER PRIMARY KEY AUTOINCREMENT,

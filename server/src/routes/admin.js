@@ -10,7 +10,7 @@ router.get('/stats', requireAuth, requireAdmin, (req, res) => {
     users: count('SELECT COUNT(*) AS n FROM users'),
     rankedEntries: count('SELECT COUNT(*) AS n FROM ranked_entries'),
     watchedEntries: count('SELECT COUNT(*) AS n FROM watched_entries'),
-    categories: count('SELECT COUNT(*) AS n FROM categories'),
+    categoryEntries: count('SELECT COUNT(*) AS n FROM category_entries'),
     cachedAnime: count('SELECT COUNT(*) AS n FROM anime_cache'),
     // Users with at least one ranked entry — a rough "active" proxy
     usersWithList: count('SELECT COUNT(DISTINCT user_id) AS n FROM ranked_entries'),

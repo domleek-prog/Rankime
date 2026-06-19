@@ -48,7 +48,7 @@ export default function AdminPage() {
         <StatCard label="Users with a list" value={totals.usersWithList} />
         <StatCard label="Ranked entries" value={totals.rankedEntries} />
         <StatCard label="Watched entries" value={totals.watchedEntries} />
-        <StatCard label="Categories" value={totals.categories} />
+        <StatCard label="Category entries" value={totals.categoryEntries} />
         <StatCard label="Cached anime" value={totals.cachedAnime} />
       </div>
 
