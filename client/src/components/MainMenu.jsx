@@ -28,7 +28,7 @@ export default function MainMenu({ leaderboardCount, watchedCount, categories, o
         <span className="font-bold italic text-white">Rankime</span> allows you to show off your Anime world - Keep track of shows you've watched and create your own ranked list in <span className="text-white/55">My Rankime Leaderboard</span>.
       </p>
 
-      {/* My Leaderboard */}
+      {/* My Leaderboard + global */}
       <section className="flex flex-col gap-2">
         <MenuRow
           icon="🏆"
@@ -36,6 +36,11 @@ export default function MainMenu({ leaderboardCount, watchedCount, categories, o
           count={leaderboardCount}
           max={50}
           onClick={() => onNavigate({ screen: 'leaderboard' })}
+        />
+        <MenuRow
+          icon="🌐"
+          label="Rankime Top 30"
+          onClick={() => onNavigate({ screen: 'global' })}
         />
       </section>
 

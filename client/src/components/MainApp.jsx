@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import api from '../api/client';
 import MainMenu from './MainMenu';
 import RankedList from './RankedList';
+import GlobalLeaderboard from './GlobalLeaderboard';
 import WatchedList from './WatchedList';
 import SearchPanel from './SearchPanel';
 import ProfilePage from './ProfilePage';
@@ -115,6 +116,7 @@ export default function MainApp() {
   function getTitle() {
     if (nav.screen === 'menu') return null;
     if (nav.screen === 'leaderboard') return 'My Rankime Leaderboard';
+    if (nav.screen === 'global') return 'Rankime Top 30';
     if (nav.screen === 'watched') return 'My Watched List';
     if (nav.screen === 'category') return nav.categoryName;
     if (nav.screen === 'profile') return 'Profile';
@@ -236,6 +238,8 @@ export default function MainApp() {
             onRemove={handleRemoveFromLeaderboard}
           />
         )}
+
+        {nav.screen === 'global' && <GlobalLeaderboard />}
 
         {nav.screen === 'category' && (
           <RankedList

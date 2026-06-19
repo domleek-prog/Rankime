@@ -10,6 +10,7 @@ const animeRoutes = require('./routes/anime');
 const categoryRoutes = require('./routes/categories');
 const watchedRoutes = require('./routes/watched');
 const adminRoutes = require('./routes/admin');
+const globalRoutes = require('./routes/global');
 const { authLimiter, searchLimiter, apiLimiter } = require('./middleware/rateLimit');
 
 const app = express();
@@ -55,6 +56,7 @@ app.use('/api', animeRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/watched', watchedRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/global', globalRoutes);
 
 // Serve built React app in production
 const clientDist = path.join(__dirname, '..', '..', 'client', 'dist');
