@@ -27,8 +27,8 @@ function setCookie(res, token) {
   res.cookie('token', token, {
     httpOnly: true,
     sameSite: 'lax',
+    secure: true, // Railway (and the custom domain) always serve over HTTPS
     maxAge: 30 * 24 * 60 * 60 * 1000,
-    // secure: true  — enable when serving over HTTPS
   });
 }
 
