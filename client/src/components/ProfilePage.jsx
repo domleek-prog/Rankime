@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import api from '../api/client';
 
-export default function ProfilePage({ onBack }) {
+export default function ProfilePage({ onBack, onOpenAdmin }) {
   const { user, logout, setUser } = useAuth();
   const [displayName, setDisplayName] = useState(user?.displayName || '');
   const [saving, setSaving] = useState(false);
@@ -78,6 +78,22 @@ export default function ProfilePage({ onBack }) {
           <span className="text-white/20 text-xs">Not yet available</span>
         </div>
       </div>
+
+      {/* Admin — only visible to the admin account */}
+      {user?.isAdmin && (
+        <button
+          onClick={onOpenAdmin}
+          className="w-full flex items-center justify-between px-5 py-4 rounded-2xl border border-violet-500/25 bg-violet-500/5 hover:bg-violet-500/10 transition-colors"
+        >
+          <span className="flex items-center gap-2.5">
+            <span className="text-base">🛠️</span>
+            <span style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.05em' }} className="text-violet-200 text-sm">Admin panel</span>
+          </span>
+          <svg className="text-violet-300/40" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M6 4l4 4-4 4"/>
+          </svg>
+        </button>
+      )}
 
       {/* Logout */}
       <button

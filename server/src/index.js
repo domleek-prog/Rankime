@@ -9,6 +9,7 @@ const authRoutes = require('./routes/auth');
 const animeRoutes = require('./routes/anime');
 const categoryRoutes = require('./routes/categories');
 const watchedRoutes = require('./routes/watched');
+const adminRoutes = require('./routes/admin');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -24,6 +25,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api', animeRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/watched', watchedRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Serve built React app in production
 const clientDist = path.join(__dirname, '..', '..', 'client', 'dist');

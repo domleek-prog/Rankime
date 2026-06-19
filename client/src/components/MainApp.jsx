@@ -6,6 +6,7 @@ import RankedList from './RankedList';
 import WatchedList from './WatchedList';
 import SearchPanel from './SearchPanel';
 import ProfilePage from './ProfilePage';
+import AdminPage from './AdminPage';
 import Toast from './Toast';
 
 const MAX_LIST = 50;
@@ -115,6 +116,7 @@ export default function MainApp() {
     if (nav.screen === 'watched') return 'My Watched List';
     if (nav.screen === 'category') return nav.categoryName;
     if (nav.screen === 'profile') return 'Profile';
+    if (nav.screen === 'admin') return 'Admin';
     if (nav.screen === 'search') {
       if (nav.searchFrom === 'watched') return 'Mark as Watched';
       if (nav.searchFrom === 'category') return `Add to ${nav.categoryName}`;
@@ -277,8 +279,10 @@ export default function MainApp() {
         )}
 
         {nav.screen === 'profile' && (
-          <ProfilePage onBack={handleBack} />
+          <ProfilePage onBack={handleBack} onOpenAdmin={() => setNav({ screen: 'admin' })} />
         )}
+
+        {nav.screen === 'admin' && <AdminPage />}
       </main>
 
       <Toast message={toast} onDismiss={() => setToast('')} />

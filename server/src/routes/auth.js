@@ -2,6 +2,18 @@ const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const db = require('../db');
+const { isAdmin } = require('../middleware/auth');
+
+// Shape a user record for the client, including the admin flag.
+function publicUser(u) {
+  const email = u.email;
+  return {
+    id: u.id,
+    email,
+    displayName: u.display_name ?? u.displayName,
+    isAdmin: isAdmin(email),
+  };
+}
 
 function signToken(user) {
   return jwt.sign(
@@ -40,7 +52,7 @@ router.post('/signup', async (req, res) => {
   const user = { id: result.lastInsertRowid, email: email.toLowerCase(), display_name: displayName.trim() };
   const token = signToken(user);
   setCookie(res, token);
-  res.status(201).json({ user: { id: user.id, email: user.email, displayName: user.display_name } });
+  res.status(201).json({ user: publicUser(user) });
 });
 
 router.post('/login', async (req, res) => {
@@ -55,7 +67,7 @@ router.post('/login', async (req, res) => {
 
   const token = signToken(user);
   setCookie(res, token);
-  res.json({ user: { id: user.id, email: user.email, displayName: user.display_name } });
+  res.json({ user: publicUser(user) });
 });
 
 router.patch('/profile', async (req, res) => {
@@ -71,7 +83,7 @@ router.patch('/profile', async (req, res) => {
   const user = db.prepare('SELECT * FROM users WHERE id = ?').get(payload.id);
   const newToken = signToken(user);
   setCookie(res, newToken);
-  res.json({ user: { id: user.id, email: user.email, displayName: user.display_name } });
+  res.json({ user: publicUser(user) });
 });
 
 router.post('/logout', (req, res) => {
@@ -84,7 +96,7 @@ router.get('/me', (req, res) => {
   if (!token) return res.json({ user: null });
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET);
-    res.json({ user: { id: payload.id, email: payload.email, displayName: payload.displayName } });
+    res.json({ user: publicUser(payload) });
   } catch {
     res.json({ user: null });
   }

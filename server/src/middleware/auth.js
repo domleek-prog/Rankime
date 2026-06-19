@@ -12,4 +12,15 @@ function requireAuth(req, res, next) {
   }
 }
 
-module.exports = { requireAuth };
+// Single-admin gate: the account whose email matches ADMIN_EMAIL.
+function isAdmin(email) {
+  const admin = process.env.ADMIN_EMAIL;
+  return !!admin && !!email && email.toLowerCase() === admin.toLowerCase();
+}
+
+function requireAdmin(req, res, next) {
+  if (!isAdmin(req.user?.email)) return res.status(403).json({ error: 'Forbidden' });
+  next();
+}
+
+module.exports = { requireAuth, requireAdmin, isAdmin };
