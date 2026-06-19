@@ -159,16 +159,16 @@ export default function MainApp() {
 
   if (loading) {
     return (
-      <div className="min-h-dvh flex items-center justify-center" style={{ background: '#080d1a' }}>
+      <div className="min-h-dvh flex items-center justify-center">
         <div className="text-white/20 text-sm animate-pulse">Loading…</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-dvh flex flex-col max-w-lg mx-auto" style={{ background: '#080d1a' }}>
+    <div className="min-h-dvh flex flex-col max-w-lg mx-auto">
       {/* Header */}
-      <header className="sticky top-0 z-10 backdrop-blur-md border-b border-white/8 px-4 py-3 flex items-center gap-3" style={{ background: 'rgba(8,13,26,0.92)' }}>
+      <header className="sticky top-0 z-10 backdrop-blur-md border-b border-white/8 px-4 py-3 flex items-center gap-3" style={{ background: 'var(--header)' }}>
         {!isMenu && (
           <button onClick={handleBack} className="text-white/40 hover:text-white transition-colors p-1 -ml-1 shrink-0" aria-label="Back">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

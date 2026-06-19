@@ -2,7 +2,7 @@ function MenuRow({ icon, label, count, max, onClick, subtle }) {
   return (
     <button
       onClick={onClick}
-      className="w-full flex items-center gap-4 px-4 py-3.5 rounded-xl border border-white/8 bg-[#0d1424] hover:border-white/15 hover:bg-[#111b30] transition-all group text-left"
+      className="w-full flex items-center gap-4 px-4 py-3.5 rounded-xl border border-white/8 bg-[var(--card)] hover:border-white/15 hover:bg-[var(--card-hover)] transition-all group text-left"
     >
       <span className="text-xl shrink-0">{icon}</span>
       <div className="flex-1 min-w-0">
@@ -75,14 +75,14 @@ export default function MainMenu({ leaderboardCount, watchedCount, categories, o
         <div className="grid grid-cols-2 gap-2">
           <button
             onClick={() => onNavigate({ screen: 'search', searchFrom: 'leaderboard' })}
-            className="flex flex-col items-center gap-1.5 py-4 rounded-xl border border-white/8 bg-[#0d1424] hover:border-violet-500/30 hover:bg-[#111b30] transition-all text-sm"
+            className="flex flex-col items-center gap-1.5 py-4 rounded-xl border border-white/8 bg-[var(--card)] hover:border-violet-500/30 hover:bg-[var(--card-hover)] transition-all text-sm"
           >
             <span className="text-xl">🏆</span>
             <span style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.06em', fontSize: '0.95rem' }} className="text-white/50">Rank anime</span>
           </button>
           <button
             onClick={() => onNavigate({ screen: 'search', searchFrom: 'watched' })}
-            className="flex flex-col items-center gap-1.5 py-4 rounded-xl border border-white/8 bg-[#0d1424] hover:border-violet-500/30 hover:bg-[#111b30] transition-all text-sm"
+            className="flex flex-col items-center gap-1.5 py-4 rounded-xl border border-white/8 bg-[var(--card)] hover:border-violet-500/30 hover:bg-[var(--card-hover)] transition-all text-sm"
           >
             <span className="text-xl">📺</span>
             <span style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.06em', fontSize: '0.95rem' }} className="text-white/50">Mark as watched</span>

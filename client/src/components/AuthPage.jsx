@@ -14,8 +14,8 @@ export default function AuthPage() {
 
   if (legalDoc) {
     return (
-      <div className="min-h-dvh flex flex-col max-w-lg mx-auto" style={{ background: '#080d1a' }}>
-        <header className="sticky top-0 z-10 backdrop-blur-md border-b border-white/8 px-4 py-3 flex items-center gap-3" style={{ background: 'rgba(8,13,26,0.92)' }}>
+      <div className="min-h-dvh flex flex-col max-w-lg mx-auto">
+        <header className="sticky top-0 z-10 backdrop-blur-md border-b border-white/8 px-4 py-3 flex items-center gap-3" style={{ background: 'var(--header)' }}>
           <button onClick={() => setLegalDoc(null)} className="text-white/40 hover:text-white transition-colors p-1 -ml-1" aria-label="Back">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 4l-6 6 6 6"/></svg>
           </button>
@@ -46,7 +46,7 @@ export default function AuthPage() {
   }
 
   return (
-    <div className="min-h-dvh flex items-center justify-center p-4" style={{ background: '#080d1a' }}>
+    <div className="min-h-dvh flex items-center justify-center p-4">
       <div className="w-full max-w-sm">
         {/* Logo */}
         <div className="text-center mb-8">
@@ -59,9 +59,9 @@ export default function AuthPage() {
           <p className="text-white/30 text-sm">Your personal anime leaderboard</p>
         </div>
 
-        <div className="rounded-2xl p-6 border border-white/8" style={{ background: '#0d1424' }}>
+        <div className="rounded-2xl p-6 border border-white/8" style={{ background: 'var(--card)' }}>
           {/* Tabs */}
-          <div className="flex mb-6 rounded-lg p-1" style={{ background: '#080d1a' }}>
+          <div className="flex mb-6 rounded-lg p-1" style={{ background: 'var(--input)' }}>
             {['login', 'signup'].map(m => (
               <button
                 key={m}
@@ -89,7 +89,7 @@ export default function AuthPage() {
                   required
                   placeholder="Anime Fan"
                   className="w-full border border-white/8 rounded-lg px-3 py-2.5 text-white placeholder-white/20 focus:outline-none focus:border-violet-500/60 transition-colors"
-                  style={{ background: '#080d1a' }}
+                  style={{ background: 'var(--input)' }}
                 />
               </div>
             )}
@@ -101,7 +101,7 @@ export default function AuthPage() {
                 onChange={e => setEmail(e.target.value)}
                 required
                 placeholder="you@example.com"
-                className="w-full bg-[#0f0f13] border border-white/10 rounded-lg px-3 py-2.5 text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 transition-colors"
+                className="w-full bg-[var(--input)] border border-white/10 rounded-lg px-3 py-2.5 text-white placeholder-white/20 focus:outline-none focus:border-violet-500/60 transition-colors"
               />
             </div>
             <div>
@@ -113,7 +113,7 @@ export default function AuthPage() {
                 required
                 minLength={8}
                 placeholder="Min. 8 characters"
-                className="w-full bg-[#0f0f13] border border-white/10 rounded-lg px-3 py-2.5 text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 transition-colors"
+                className="w-full bg-[var(--input)] border border-white/10 rounded-lg px-3 py-2.5 text-white placeholder-white/20 focus:outline-none focus:border-violet-500/60 transition-colors"
               />
             </div>
 

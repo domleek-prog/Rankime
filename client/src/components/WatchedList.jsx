@@ -6,7 +6,7 @@ function WatchedCard({ entry, onRemove, onPromote, isRanked, confirmingId, setCo
   const genres = (entry.genres || []).slice(0, 3);
 
   return (
-    <div className="flex items-center gap-3 bg-[#0d1424] border border-white/8 rounded-xl p-3 group">
+    <div className="flex items-center gap-3 bg-[var(--card)] border border-white/8 rounded-xl p-3 group">
       <div className="shrink-0 w-12 h-16 rounded-lg overflow-hidden bg-white/5">
         {entry.coverImageUrl
           ? <img src={entry.coverImageUrl} alt={title} className="w-full h-full object-cover" />

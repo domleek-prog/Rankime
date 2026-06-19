@@ -48,7 +48,7 @@ export default function SearchPanel({ leaderboardIds, watchedIds, categoryIds, o
           value={query}
           onChange={e => setQuery(e.target.value)}
           placeholder="Search anime…"
-          className="w-full bg-[#0d1424] border border-white/10 rounded-xl pl-9 pr-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-violet-500/60 transition-colors"
+          className="w-full bg-[var(--card)] border border-white/10 rounded-xl pl-9 pr-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-violet-500/60 transition-colors"
         />
         {loading && (
           <span className="absolute right-3 top-1/2 -translate-y-1/2 text-white/25 text-xs animate-pulse">searching…</span>

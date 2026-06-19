@@ -57,7 +57,7 @@ function SortableItem({ entry, onRemove, confirmingId, setConfirmingId }) {
       style={style}
       className={`relative flex items-center gap-0 rounded-xl overflow-hidden border ${
         medal ? `${medal.border} shadow-lg ${medal.glow}` : 'border-white/8'
-      } bg-[#0d1424] group select-none`}
+      } bg-[var(--card)] group select-none`}
     >
       {/* Left colour accent bar */}
       <div className="shrink-0 w-1 self-stretch" style={{ background: accentColor }} />
@@ -144,7 +144,7 @@ function DragPreview({ entry }) {
   if (!entry) return null;
   const title = entry.titleEnglish || entry.titleRomaji;
   return (
-    <div className="flex items-center gap-3 bg-[#0f1428] border border-violet-500/50 rounded-xl px-4 py-3 shadow-2xl shadow-violet-900/30 w-full">
+    <div className="flex items-center gap-3 bg-[var(--card-hover)] border border-violet-500/50 rounded-xl px-4 py-3 shadow-2xl shadow-violet-900/30 w-full">
       <span className="text-sm font-bold text-violet-400">#{entry.rankPosition}</span>
       <div className="w-9 h-12 rounded-lg overflow-hidden bg-white/5 shrink-0">
         {entry.coverImageUrl && <img src={entry.coverImageUrl} alt={title} className="w-full h-full object-cover" />}

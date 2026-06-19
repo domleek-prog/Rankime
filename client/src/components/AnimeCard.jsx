@@ -3,7 +3,7 @@ export default function AnimeCard({ anime, onAdd, status, addLabel = '+ Add' }) 
   const genres = (anime.genres || []).slice(0, 3);
 
   return (
-    <div className="flex gap-3 rounded-xl p-3 border border-white/8 bg-[#0d1424] hover:border-white/15 transition-colors">
+    <div className="flex gap-3 rounded-xl p-3 border border-white/8 bg-[var(--card)] hover:border-white/15 transition-colors">
       <div className="shrink-0 w-12 h-16 rounded-lg overflow-hidden bg-white/5">
         {anime.coverImageUrl
           ? <img src={anime.coverImageUrl} alt={title} className="w-full h-full object-cover" />

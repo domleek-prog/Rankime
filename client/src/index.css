@@ -5,11 +5,18 @@
 :root {
   --font-display: 'Bangers', cursive;
   --font-body: 'Nunito', system-ui, sans-serif;
+
+  /* Brightened navy palette (see AppBackground for the aurora/petals layer) */
+  --page: #1a2747;
+  --card: #1f2c4c;
+  --card-hover: #28365c;
+  --header: rgba(26, 39, 71, 0.82);
+  --input: #14213d;
 }
 
 body {
   margin: 0;
-  background: #080d1a;
+  background: var(--page);
   color: #e2e2e8;
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
@@ -17,4 +24,26 @@ body {
 
 #root {
   min-height: 100dvh;
+}
+
+/* Falling sakura petals (AppBackground) */
+@keyframes rk-fall {
+  0%   { transform: translateY(-24px) translateX(0) rotate(0deg); opacity: 0; }
+  12%  { opacity: var(--pop, 0.5); }
+  88%  { opacity: var(--pop, 0.5); }
+  100% { transform: translateY(105vh) translateX(var(--sway, 18px)) rotate(200deg); opacity: 0; }
+}
+.rk-petal {
+  position: absolute;
+  top: 0;
+  width: 9px;
+  height: 13px;
+  border-radius: 80% 0 80% 0;
+  animation: rk-fall linear infinite;
+  will-change: transform, opacity;
+}
+
+/* Respect users who prefer reduced motion: keep the look, drop the drift */
+@media (prefers-reduced-motion: reduce) {
+  .rk-petal { animation: none; opacity: var(--pop, 0.5); }
 }

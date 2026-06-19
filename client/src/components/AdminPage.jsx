@@ -3,7 +3,7 @@ import api from '../api/client';
 
 function StatCard({ label, value }) {
   return (
-    <div className="bg-[#0d1424] border border-white/8 rounded-2xl p-4 flex flex-col gap-1">
+    <div className="bg-[var(--card)] border border-white/8 rounded-2xl p-4 flex flex-col gap-1">
       <span style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.06em' }} className="text-2xl text-white">
         {value}
       </span>
@@ -55,7 +55,7 @@ export default function AdminPage() {
       {/* Recent signups */}
       <section className="flex flex-col gap-2">
         <p style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.12em', fontSize: '0.85rem' }} className="text-white/30 uppercase px-1">Recent signups</p>
-        <div className="bg-[#0d1424] border border-white/8 rounded-2xl divide-y divide-white/5">
+        <div className="bg-[var(--card)] border border-white/8 rounded-2xl divide-y divide-white/5">
           {recentUsers.length === 0 && <p className="text-white/20 text-sm text-center py-6">No users yet</p>}
           {recentUsers.map(u => (
             <div key={u.id} className="flex items-center justify-between px-4 py-3 gap-3">
@@ -72,7 +72,7 @@ export default function AdminPage() {
       {/* Most-ranked anime */}
       <section className="flex flex-col gap-2">
         <p style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.12em', fontSize: '0.85rem' }} className="text-white/30 uppercase px-1">Most-ranked anime</p>
-        <div className="bg-[#0d1424] border border-white/8 rounded-2xl divide-y divide-white/5">
+        <div className="bg-[var(--card)] border border-white/8 rounded-2xl divide-y divide-white/5">
           {topAnime.length === 0 && <p className="text-white/20 text-sm text-center py-6">No data yet</p>}
           {topAnime.map((a, i) => (
             <div key={a.anilistId} className="flex items-center gap-3 px-4 py-2.5">

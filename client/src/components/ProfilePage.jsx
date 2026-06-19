@@ -58,7 +58,7 @@ export default function ProfilePage({ onBack, onOpenAdmin, onOpenLegal }) {
       </div>
 
       {/* Edit display name */}
-      <div className="bg-[#0d1424] border border-white/8 rounded-2xl p-5 flex flex-col gap-4">
+      <div className="bg-[var(--card)] border border-white/8 rounded-2xl p-5 flex flex-col gap-4">
         <p style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.06em', fontSize: '1rem' }} className="text-white/50 uppercase">Display name</p>
         <form onSubmit={handleSave} className="flex flex-col gap-3">
           <input
@@ -66,7 +66,7 @@ export default function ProfilePage({ onBack, onOpenAdmin, onOpenLegal }) {
             value={displayName}
             onChange={e => { setDisplayName(e.target.value); setSaved(false); }}
             maxLength={32}
-            className="w-full bg-[#080d1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-violet-500/60 transition-colors"
+            className="w-full bg-[var(--input)] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-violet-500/60 transition-colors"
           />
           {error && <p className="text-red-400 text-sm">{error}</p>}
           <button
@@ -81,7 +81,7 @@ export default function ProfilePage({ onBack, onOpenAdmin, onOpenLegal }) {
       </div>
 
       {/* Account info */}
-      <div className="bg-[#0d1424] border border-white/8 rounded-2xl p-5 flex flex-col gap-3">
+      <div className="bg-[var(--card)] border border-white/8 rounded-2xl p-5 flex flex-col gap-3">
         <p style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.06em', fontSize: '1rem' }} className="text-white/50 uppercase">Account</p>
         <div className="flex justify-between items-center text-sm">
           <span className="text-white/30">Email</span>
