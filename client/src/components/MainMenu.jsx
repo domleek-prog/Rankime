@@ -39,9 +39,22 @@ export default function MainMenu({ leaderboardCount, watchedCount, categories, o
         />
       </section>
 
+      {/* Watched List */}
+      <section>
+        <div className="flex flex-col gap-2">
+          <p style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.12em', fontSize: '0.85rem' }} className="text-white/30 uppercase px-1 mb-0">Watched</p>
+          <MenuRow
+            icon="📺"
+            label="My Watched List"
+            count={watchedCount}
+            onClick={() => onNavigate({ screen: 'watched' })}
+          />
+        </div>
+      </section>
+
       {/* Categories — fixed set, each its own ranked list */}
       <section>
-        <p style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.12em', fontSize: '0.85rem' }} className="text-white/30 uppercase px-1 mb-2">Categories</p>
+        <p style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.12em', fontSize: '0.85rem' }} className="text-white/30 uppercase px-1 mb-2">Rank by Category</p>
         <div className="flex flex-col gap-2">
           {categories.map(cat => (
             <MenuRow
@@ -53,19 +66,6 @@ export default function MainMenu({ leaderboardCount, watchedCount, categories, o
               onClick={() => onNavigate({ screen: 'category', categoryId: cat.id, categoryName: cat.name })}
             />
           ))}
-        </div>
-      </section>
-
-      {/* Watched List */}
-      <section>
-        <div className="flex flex-col gap-2">
-          <p style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.12em', fontSize: '0.85rem' }} className="text-white/30 uppercase px-1 mb-0">Watched</p>
-          <MenuRow
-            icon="📺"
-            label="My Watched List"
-            count={watchedCount}
-            onClick={() => onNavigate({ screen: 'watched' })}
-          />
         </div>
       </section>
 
