@@ -7,6 +7,7 @@ import WatchedList from './WatchedList';
 import SearchPanel from './SearchPanel';
 import ProfilePage from './ProfilePage';
 import AdminPage from './AdminPage';
+import LegalContent from './LegalContent';
 import Toast from './Toast';
 
 const MAX_LIST = 50;
@@ -118,6 +119,8 @@ export default function MainApp() {
     if (nav.screen === 'category') return nav.categoryName;
     if (nav.screen === 'profile') return 'Profile';
     if (nav.screen === 'admin') return 'Admin';
+    if (nav.screen === 'privacy') return 'Privacy Policy';
+    if (nav.screen === 'terms') return 'Terms of Service';
     if (nav.screen === 'search') {
       if (nav.searchFrom === 'watched') return 'Mark as Watched';
       if (nav.searchFrom === 'category') return `Add to ${nav.categoryName}`;
@@ -149,11 +152,7 @@ export default function MainApp() {
   }
 
   function handleBack() {
-    if (nav.screen === 'search') {
-      setNav(nav.prev || { screen: 'menu' });
-    } else {
-      setNav({ screen: 'menu' });
-    }
+    setNav(nav.prev || { screen: 'menu' });
   }
 
   const isMenu = nav.screen === 'menu';
@@ -279,10 +278,18 @@ export default function MainApp() {
         )}
 
         {nav.screen === 'profile' && (
-          <ProfilePage onBack={handleBack} onOpenAdmin={() => setNav({ screen: 'admin' })} />
+          <ProfilePage
+            onBack={handleBack}
+            onOpenAdmin={() => setNav({ screen: 'admin', prev: { screen: 'profile' } })}
+            onOpenLegal={(doc) => setNav({ screen: doc, prev: { screen: 'profile' } })}
+          />
         )}
 
         {nav.screen === 'admin' && <AdminPage />}
+
+        {(nav.screen === 'privacy' || nav.screen === 'terms') && (
+          <LegalContent doc={nav.screen} />
+        )}
       </main>
 
       <Toast message={toast} onDismiss={() => setToast('')} />

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import api from '../api/client';
 
-export default function ProfilePage({ onBack, onOpenAdmin }) {
+export default function ProfilePage({ onBack, onOpenAdmin, onOpenLegal }) {
   const { user, logout, setUser } = useAuth();
   const [displayName, setDisplayName] = useState(user?.displayName || '');
   const [saving, setSaving] = useState(false);
@@ -116,6 +116,13 @@ export default function ProfilePage({ onBack, onOpenAdmin }) {
       >
         Log out
       </button>
+
+      {/* Legal */}
+      <div className="flex items-center justify-center gap-4 text-xs">
+        <button onClick={() => onOpenLegal('privacy')} className="text-white/30 hover:text-white/60 transition-colors">Privacy Policy</button>
+        <span className="text-white/15">·</span>
+        <button onClick={() => onOpenLegal('terms')} className="text-white/30 hover:text-white/60 transition-colors">Terms of Service</button>
+      </div>
 
       {/* Danger zone — delete account */}
       <div className="mt-2 pt-5 border-t border-white/5 flex flex-col gap-3">

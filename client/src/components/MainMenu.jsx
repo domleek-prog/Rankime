@@ -89,6 +89,9 @@ export default function MainMenu({ leaderboardCount, watchedCount, categories, o
           </button>
         </div>
       </section>
+
+      {/* Attribution */}
+      <p className="text-center text-white/20 text-[11px] mt-2">Anime data powered by AniList</p>
     </div>
   );
 }

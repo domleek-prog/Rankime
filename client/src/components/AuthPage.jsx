@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import LegalContent from './LegalContent';
 
 export default function AuthPage() {
   const { signup, login } = useAuth();
@@ -9,6 +10,23 @@ export default function AuthPage() {
   const [displayName, setDisplayName] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [legalDoc, setLegalDoc] = useState(null); // 'privacy' | 'terms' | null
+
+  if (legalDoc) {
+    return (
+      <div className="min-h-dvh flex flex-col max-w-lg mx-auto" style={{ background: '#080d1a' }}>
+        <header className="sticky top-0 z-10 backdrop-blur-md border-b border-white/8 px-4 py-3 flex items-center gap-3" style={{ background: 'rgba(8,13,26,0.92)' }}>
+          <button onClick={() => setLegalDoc(null)} className="text-white/40 hover:text-white transition-colors p-1 -ml-1" aria-label="Back">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 4l-6 6 6 6"/></svg>
+          </button>
+          <h1 style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', letterSpacing: '0.04em' }} className="text-white">
+            {legalDoc === 'terms' ? 'Terms of Service' : 'Privacy Policy'}
+          </h1>
+        </header>
+        <main className="flex-1 p-4"><LegalContent doc={legalDoc} /></main>
+      </div>
+    );
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -115,9 +133,25 @@ export default function AuthPage() {
             </button>
           </form>
 
+          {mode === 'signup' && (
+            <p className="text-center text-xs text-white/30 mt-4 leading-relaxed">
+              By creating an account you agree to our{' '}
+              <button type="button" onClick={() => setLegalDoc('terms')} className="text-violet-300/80 hover:text-violet-300 underline">Terms</button>{' '}
+              and{' '}
+              <button type="button" onClick={() => setLegalDoc('privacy')} className="text-violet-300/80 hover:text-violet-300 underline">Privacy Policy</button>.
+            </p>
+          )}
+
           <p className="text-center text-xs text-gray-600 mt-4">
             Known gaps: email verification and password reset not yet implemented.
           </p>
+        </div>
+
+        {/* Footer legal links */}
+        <div className="flex items-center justify-center gap-4 text-xs mt-6">
+          <button onClick={() => setLegalDoc('privacy')} className="text-white/25 hover:text-white/50 transition-colors">Privacy Policy</button>
+          <span className="text-white/15">·</span>
+          <button onClick={() => setLegalDoc('terms')} className="text-white/25 hover:text-white/50 transition-colors">Terms of Service</button>
         </div>
       </div>
     </div>
